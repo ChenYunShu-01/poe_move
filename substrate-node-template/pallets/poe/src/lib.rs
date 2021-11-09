@@ -95,9 +95,9 @@ pub mod pallet {
             Proofs::<T>::remove(&claim);
             Proofs::<T>::insert(
                 &claim,
-                (sender.clone(), <frame_system::Pallet::<T>>::block_number()),
+                (to.clone(), <frame_system::Pallet::<T>>::block_number()),
             );
-            Self::deposit_event(Event::ClaimMoved(sender, claim));
+            Self::deposit_event(Event::ClaimMoved(to, claim));
             Ok(().into())
         }
     }
