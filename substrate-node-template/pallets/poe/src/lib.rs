@@ -91,7 +91,7 @@ pub mod pallet {
         ) -> DispatchResultWithPostInfo {
             let to = ensure_signed(destination)?;
             let (owner, _) = Proofs::<T>::get(&claim).ok_or(Error::<T>::ClaimNotExist)?;
-            ensure!(owner != to, Error::<T>::NotClaimOwner);
+            ensure!(owner != to, Error::<T>::IsClaimOwner);
             Proofs::<T>::remove(&claim);
             Proofs::<T>::insert(
                 &claim,
