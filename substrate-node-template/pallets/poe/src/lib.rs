@@ -45,7 +45,7 @@ pub mod pallet {
         ProofAlreadyExist,
         ClaimNotExist,
         NotClaimOwner,
-        IsClaimOwner
+        DestinationIsClaimOwner
 	}
 
     #[pallet::hooks]
@@ -93,7 +93,7 @@ pub mod pallet {
             let sender = ensure_signed(origin)?;
             let (owner, _) = Proofs::<T>::get(&claim).ok_or(Error::<T>::ClaimNotExist)?;
             ensure!(owner == sender, Error::<T>::NotClaimOwner);
-            ensure!(owner != destination, Error::<T>::IsClaimOwner);
+            ensure!(owner != destination, Error::<T>::DestinationIsClaimOwner);
             Proofs::<T>::remove(&claim);
             Proofs::<T>::insert(
                 &claim,
